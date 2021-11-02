@@ -1,0 +1,15 @@
+{
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "**/__pycache"
+    ],
+    "venv": "env",
+    "venvPath": ".",
+    "executionEnvironments": [
+        {
+            "root": "."
+        }
+    ]
+}
