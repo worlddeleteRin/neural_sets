@@ -1,4 +1,5 @@
 import numpy as np
+import h5py
 
 from keras.models import Sequential
 from keras.layers.core import Dense
@@ -78,14 +79,30 @@ model.compile(
 batch_size = 128 # сколько примеров будет скормлено за раз
 epochs = 5 # сколько будет прогонов
 
-model.fit(
+print(model.fit(
     x_train,
     Y_train,
     batch_size = 128,
     epochs = 5,
     verbose = 2,
     validation_data = (x_test, Y_test)
-)
+))
+"""
+loss - функция ошибки
+accuracy - точность на обучающей выборке
+val_loss - функция ошибка на тестовой выборке
+val_accuracy - точность на тестовой выборке
+"""
+
+# запись и считывание из файла
+model.save('lab1_model.h5')
+
+# тестирование модели
+# когда считали с файла, нужно проверить результаты работы модели
+
+score = model.evaluate(x_test, Y_test, verbose = 0)
+print('test score:', score[0])
+print('test accuracy:', score[1])
 
 
 
