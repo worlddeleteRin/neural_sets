@@ -8,6 +8,12 @@ from sklearn.model_selection import train_test_split
 
 print('end of importing')
 
+"""
+Лабораторная работа 1. Вариант 1.
+Задание - Задано двух байтное целое число в битовом формате. Определить, делится ли оно на 3
+Выборка - 10000 случайных чисел из диапазона от 0 до 65535
+"""
+
 
 # constants
 bit_count = 16
@@ -20,13 +26,18 @@ def fit_len(d, count = bit_count):
         d = [0] * (count - len(d)) + d
     return d
 
+def check_divide(divider: int, number: int):
+    if number % divider == 0:
+        return 0
+    return 1
+
 x = np.array([fit_len([int(c) for c in bin(i)[2:]]) for i in range(total_count)])
 
 print('x is', x)
 print('x shape is', x.shape)
 
 # массив зависимой переменной
-y = np.array([i % 2 for i in range(total_count)])
+y = np.array([check_divide(3, i) for i in range(total_count)])
 
 print('y is', y)
 print('y shape is', y.shape)
@@ -42,7 +53,7 @@ print('x_train: ', x_train.shape)
 print('y_train: ', y_train.shape)
 
 # Определим классы и приведем переменные к категориальным признакам 
-classes = ['четное', 'нечетное']
+classes = ['делится на 3', 'не делится на 3']
 nb_classes = len(classes)
 
 Y_train = np_utils.to_categorical(y_train, num_classes = nb_classes)
@@ -85,7 +96,7 @@ print(model.fit(
     x_train,
     Y_train,
     batch_size = 128,
-    epochs = 5,
+    epochs = epochs,
     verbose = 2,
     validation_data = (x_test, Y_test)
 ))
