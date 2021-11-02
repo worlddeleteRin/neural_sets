@@ -1,6 +1,6 @@
 {
     "include": [
-        "."
+        "labs"
     ],
     "exclude": [
         "**/__pycache"
@@ -9,7 +9,7 @@
     "venvPath": ".",
     "executionEnvironments": [
         {
-            "root": "."
+            "root": "labs/"
         }
     ]
 }
