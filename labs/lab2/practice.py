@@ -1,10 +1,10 @@
 
 """
     Лабораторная работа 2
-    Вариант 14
-    Функциональная связь -  ln(2x^2 - 3x + 2)
-    Интервал построения - [1;4]
-    Стохастическая компонента - мультипликативная, равномерное на [1,2;1,8]
+    Вариант 23
+    Функциональная связь - 3 + 5x + 2x^2
+    Интервал построения - [-3;0]
+    Мультипликативная, нормальное, M(X)=1.2 sko = 0.7
 """
 
 import math
@@ -22,8 +22,8 @@ import random
 print('eof imports')
 
 # constants 
-interval_start = 1 # начало интервала по x для выборки
-interval_end = 4 # конец интервала по x для выборки
+interval_start = -3 # начало интервала по x для выборки
+interval_end = 0 # конец интервала по x для выборки
 total_interval_count = 1000 # всего интервалов
 learning_sample_size = 200 # кол-во точек в выборке
 
@@ -52,7 +52,7 @@ print('Интервал: \n', x)
 print('** Определяем функциональную связь, которую будем восстанавливать **')
 
 def relation_spot(x):
-    return np.log((2 * x) ** 2 - 3 * x + 2)
+    return (3 + 5 * x + (2 * x) ** 2)
     
 # рассчитываем значение функции для интервалов
 y = np.array(
@@ -80,7 +80,8 @@ print('** Разбиение выборки на обучающую и тест�
 
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
-    test_size = 1.0 - learning_sample_size / total_interval_count
+    test_size = 1.0 - learning_sample_size / total_interval_count,
+    random_state = 42
 )
 print(f'x_train: {x_train.shape}, x_test: {x_test.shape}, y_train: {y_train.shape}, y_test: {y_test.shape}')
 
@@ -225,7 +226,6 @@ ax = plt.gca()
 ax.axhline(y = 0, color = 'k')
 ax.axvline(x = 0, color = 'k')
 plt.legend()
-# plt.show()
 
 
 """
@@ -233,23 +233,24 @@ plt.legend()
     нейронной сети
 """
 
-train_start_int = 1.2
-train_stop_int = 1.8
+train_m = 1.2
+train_sko = 0.7
 
-def variate(z, start_interval, stop_interval):
-    return z * random.uniform(start_interval, stop_interval)
+def variate(z, m, sko):
+    return z * random.normalvariate(m, sko)
 
 
 # снова разбиваем данные
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
-    test_size = 1.0 - learning_sample_size / total_interval_count
+    test_size = 1.0 - learning_sample_size / total_interval_count,
+    random_state = 42
 )
 
 # применяем влияение стох компоненты к обучаяющим данным
 y_train = np.array(
     [
-        variate(i, train_start_int, train_stop_int) for i in y_train
+        variate(i, train_m, train_sko) for i in y_train
     ]
 )
 
@@ -269,12 +270,12 @@ ax.axvline(x = 0, color = 'k')
 plt.legend()
 
 
-# test_m = 1
-# test_sko = 0.1
+# test_m = 1.5
+# test_sko = 0.6
 # применяем влияение стох компоненты к тестовым данным
 y_test = np.array(
     [
-        variate(i, train_start_int, train_stop_int) for i in y_test
+        variate(i, train_m, train_sko) for i in y_test
     ]
 )
 
@@ -313,6 +314,31 @@ print(f'std deviation after normalization: {x_train.std(axis = 0)}')
 """
     Обучение сети
 """
+print('Создаем нейронную сеть')
+
+model = Sequential()
+model.add(
+    Dense(
+       neiron_count,
+       activation = 'relu',
+       input_shape = (1,)
+    )
+)
+model.add(
+    Dense(
+        neiron_count,
+        activation = 'relu'
+    )
+)
+model.add(Dense(1))
+
+model.compile(
+    optimizer = 'adam',
+    loss = 'mse',
+    metrics = ['mae']
+)
+
+
 print('** Обучение сети **')
 
 history = model.fit(
@@ -372,6 +398,31 @@ plt.legend()
     Использование EarlyStopping Callback для остановки обучения нейросети 
     при переобучении
 """
+print('Создаем нейронную сеть')
+
+model = Sequential()
+model.add(
+    Dense(
+       neiron_count,
+       activation = 'relu',
+       input_shape = (1,)
+    )
+)
+model.add(
+    Dense(
+        neiron_count,
+        activation = 'relu'
+    )
+)
+model.add(Dense(1))
+
+model.compile(
+    optimizer = 'adam',
+    loss = 'mse',
+    metrics = ['mae']
+)
+
+
 
 early_stopping_callback = EarlyStopping(monitor = 'val_mae', patience = 3)
 

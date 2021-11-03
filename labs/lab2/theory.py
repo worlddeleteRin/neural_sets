@@ -71,7 +71,8 @@ print('** Разбиение выборки на обучающую и тест�
 
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
-    test_size = 1.0 - learning_sample_size / total_interval_count
+    test_size = 1.0 - learning_sample_size / total_interval_count,
+    random_state = 42
 )
 print(f'x_train: {x_train.shape}, x_test: {x_test.shape}, y_train: {y_train.shape}, y_test: {y_test.shape}')
 
@@ -234,7 +235,8 @@ def variate(z, m, sko):
 # снова разбиваем данные
 x_train, x_test, y_train, y_test = train_test_split(
     x, y,
-    test_size = 1.0 - learning_sample_size / total_interval_count
+    test_size = 1.0 - learning_sample_size / total_interval_count,
+    random_state = 42
 )
 
 # применяем влияение стох компоненты к обучаяющим данным
@@ -304,6 +306,29 @@ print(f'std deviation after normalization: {x_train.std(axis = 0)}')
 """
     Обучение сети
 """
+
+model = Sequential()
+model.add(
+    Dense(
+       neiron_count,
+       activation = 'relu',
+       input_shape = (1,)
+    )
+)
+model.add(
+    Dense(
+        neiron_count,
+        activation = 'relu'
+    )
+)
+model.add(Dense(1))
+
+model.compile(
+    optimizer = 'adam',
+    loss = 'mse',
+    metrics = ['mae']
+)
+
 print('** Обучение сети **')
 
 history = model.fit(
@@ -363,6 +388,27 @@ plt.legend()
     Использование EarlyStopping Callback для остановки обучения нейросети 
     при переобучении
 """
+model = Sequential()
+model.add(
+    Dense(
+       neiron_count,
+       activation = 'relu',
+       input_shape = (1,)
+    )
+)
+model.add(
+    Dense(
+        neiron_count,
+        activation = 'relu'
+    )
+)
+model.add(Dense(1))
+
+model.compile(
+    optimizer = 'adam',
+    loss = 'mse',
+    metrics = ['mae']
+)
 
 early_stopping_callback = EarlyStopping(monitor = 'val_mae', patience = 3)
 
