@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 from typing import List
+import random
 
 print('eof imports')
 
@@ -55,6 +56,7 @@ print('Значение функции для интервалов: \n', y)
 """
 print('** Построение графика исходной функциональной зависимости **')
 
+plt.figure(0)
 plt.plot(x, y, label = 'функция')
 ax = plt.gca()
 ax.axhline(y = 0, color = 'k') # рисуем ось X
@@ -88,6 +90,7 @@ y1 = [z[1] for z in z_sorted]
 
 print('** Строим график на основании исходной и обучающей выборки **')
 
+plt.figure(1)
 plt.plot(
     x, y,
     label = 'Исходные'
@@ -173,6 +176,7 @@ print(history.history.keys())
 
 # построим график результирующих параметров процесса обучения сети
 
+plt.figure(2)
 plt.plot(
     history.history['mae'],
     label = 'Обучающая выборка'
@@ -184,10 +188,58 @@ plt.plot(
 plt.xlabel('Эпоха обучения')
 plt.ylabel('Средняя абсолютная ошибка')
 plt.legend()
-plt.show()
+# plt.show()
 
 # проверка точности нейронной сети на тестовой выборке
-mse, mae - model.evaluate(x_test, y_test, verbose = 0)
+mse, mae = model.evaluate(x_test, y_test, verbose = 0)
 print(f'Среднеквадратичное отклонение : {mse}')
 print(f'Средняя абсолютная ошибка: {mae}')
 
+"""
+    Визуализация работы сети
+"""
+# нормируем полную выборку
+x_norm = x - x_mean
+x_norm /= x_std
+
+# рассчитваем выходные значения по полной выборке
+y_pred = model.predict(x_norm)
+
+print(f'Среднее значение после визуализации: {x_norm.mean(axis = 0)}')
+print(f'Стандартное отклонение после нормализации: {x_norm.std(axis = 0)}')
+
+# сравниваем реальные и прогнозные значения
+plt.figure(3)
+plt.plot(x, y, label = 'Исходные')
+plt.plot(x, y_pred, label = 'Прогнозные')
+ax = plt.gca()
+ax.axhline(y = 0, color = 'k')
+ax.axvline(x = 0, color = 'k')
+plt.legend()
+# plt.show()
+
+
+"""
+    Оценка влияния стохастической компоненты на обучаемость
+    нейронной сети
+"""
+train_m = 1.5
+train_sko = 0.1
+
+def variate(z, m, sko):
+    return z * random.normalvariate(m, sko)
+
+y_train = np.array(
+    [
+        variate(i, train_m, train_sko) for i in y_train
+    ]
+)
+
+plt.figure(4)
+plt.plot(x, y, label = 'Исходные')
+plt.plot(x_train, y_train, label = 'Обучающие')
+ax = plt.gca()
+ax.axhline(y = 0, color = 'k')
+ax.axvline(x = 0, color = 'k')
+plt.legend()
+plt.show()
