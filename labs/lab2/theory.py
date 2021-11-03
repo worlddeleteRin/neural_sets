@@ -223,23 +223,198 @@ plt.legend()
     Оценка влияния стохастической компоненты на обучаемость
     нейронной сети
 """
+
 train_m = 1.5
 train_sko = 0.1
 
 def variate(z, m, sko):
     return z * random.normalvariate(m, sko)
 
+
+# снова разбиваем данные
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y,
+    test_size = 1.0 - learning_sample_size / total_interval_count
+)
+
+# применяем влияение стох компоненты к обучаяющим данным
 y_train = np.array(
     [
         variate(i, train_m, train_sko) for i in y_train
     ]
 )
 
+# сортируем для отображения
+z = zip(x_train, y_train)
+z_sorted = sorted(z, key = lambda tup: tup[0])
+
+x1 = [z[0] for z in z_sorted]
+y1 = [z[1] for z in z_sorted]
+
 plt.figure(4)
 plt.plot(x, y, label = 'Исходные')
-plt.plot(x_train, y_train, label = 'Обучающие')
+plt.plot(x1, y1, label = 'Обучающие')
 ax = plt.gca()
 ax.axhline(y = 0, color = 'k')
 ax.axvline(x = 0, color = 'k')
 plt.legend()
+
+
+test_m = 1
+test_sko = 0.1
+# применяем влияение стох компоненты к тестовым данным
+y_test = np.array(
+    [
+        variate(i, test_m, test_sko) for i in y_test
+    ]
+)
+
+# сортируем для отображения
+z = zip(x_test, y_test)
+z_sorted = sorted(z, key = lambda tup: tup[0])
+x1 = [z[0] for z in z_sorted]
+y1 = [z[1] for z in z_sorted]
+
+plt.figure(5)
+plt.plot(x, y, label = 'Исходные')
+plt.plot(x1, y1, label = 'Тестовая')
+ax = plt.gca()
+ax.axhline(y = 0, color = 'k')
+ax.axvline(x = 0, color = 'k')
+plt.legend()
+
+"""
+    Нормализация данных
+"""
+x_mean = x_train.mean(axis = 0) # Среднее значение 
+x_std = x_train.std(axis = 0) # Стандартное отклонение
+
+print(f'Среднее значение : {x_mean}')
+print(f'Стандартное отклонение : {x_std}')
+
+# нормируем входные данные для обучающей и тестовой выборки
+x_train -= x_mean
+x_train /= x_std
+x_test -= x_mean
+x_test /= x_std
+
+print(f'mean value after normalization: {x_train.mean(axis = 0)}')
+print(f'std deviation after normalization: {x_train.std(axis = 0)}')
+
+"""
+    Обучение сети
+"""
+print('** Обучение сети **')
+
+history = model.fit(
+    x_train, y_train,
+    batch_size = 20,
+    epochs = epoch_count,
+    verbose = 2,
+    validation_data = (x_test, y_test)
+)
+
+"""
+    Оценка точности работы сети
+"""
+plt.figure(6)
+plt.plot(
+    history.history['mae'],
+    label = 'Обучающая выборка'
+)
+plt.plot(
+    history.history['val_mae'], 
+    label = 'Тестовая выборка'
+)
+plt.xlabel('Эпоха обучения')
+plt.ylabel('Средняя абсолютная ошибка')
+plt.legend()
+# plt.show()
+
+# проверка точности нейронной сети на тестовой выборке
+mse, mae = model.evaluate(x_test, y_test, verbose = 0)
+print(f'Среднеквадратичное отклонение : {mse}')
+print(f'Средняя абсолютная ошибка: {mae}')
+
+"""
+    Визуализация работы сети
+"""
+# нормируем полную выборку
+x_norm = x - x_mean
+x_norm /= x_std
+
+# рассчитваем выходные значения по полной выборке
+y_pred = model.predict(x_norm)
+
+print(f'Среднее значение после нормализации: {x_norm.mean(axis = 0)}')
+print(f'Стандартное отклонение после нормализации: {x_norm.std(axis = 0)}')
+
+# сравниваем реальные и прогнозные значения
+plt.figure(7)
+plt.plot(x, y, label = 'Исходные')
+plt.plot(x, y_pred, label = 'Прогнозные')
+ax = plt.gca()
+ax.axhline(y = 0, color = 'k')
+ax.axvline(x = 0, color = 'k')
+plt.legend()
+
+
+"""
+    Использование EarlyStopping Callback для остановки обучения нейросети 
+    при переобучении
+"""
+
+early_stopping_callback = EarlyStopping(monitor = 'val_mae', patience = 3)
+
+history = model.fit(
+    x_train, y_train,
+    batch_size = 20,
+    epochs = epoch_count,
+    verbose = 2,
+    validation_data = (x_test, y_test),
+    callbacks = [early_stopping_callback]
+)
+print('Обучение остановлено на эпохе', early_stopping_callback.stopped_epoch)
+
+"""
+    Оценка точности работы сети
+"""
+plt.figure(8)
+plt.plot(
+    history.history['mae'],
+    label = 'Обучающая выборка'
+)
+plt.plot(
+    history.history['val_mae'], 
+    label = 'Тестовая выборка'
+)
+plt.xlabel('Эпоха обучения')
+plt.ylabel('Средняя абсолютная ошибка')
+plt.legend()
+# plt.show()
+
+# проверка точности нейронной сети на тестовой выборке
+mse, mae = model.evaluate(x_test, y_test, verbose = 0)
+print(f'Среднеквадратичное отклонение : {mse}')
+print(f'Средняя абсолютная ошибка: {mae}')
+
+"""
+    Визуализация работы сети
+"""
+# нормируем полную выборку
+x_norm = x - x_mean
+x_norm /= x_std
+
+# рассчитваем выходные значения по полной выборке
+y_pred = model.predict(x_norm)
+
+# сравниваем реальные и прогнозные значения
+plt.figure(9)
+plt.plot(x, y, label = 'Исходные')
+plt.plot(x, y_pred, label = 'Прогнозные')
+ax = plt.gca()
+ax.axhline(y = 0, color = 'k')
+ax.axvline(x = 0, color = 'k')
+plt.legend()
+
 plt.show()
