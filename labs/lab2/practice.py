@@ -25,7 +25,7 @@ print('eof imports')
 interval_start = -3 # начало интервала по x для выборки
 interval_end = 0 # конец интервала по x для выборки
 total_interval_count = 1000 # всего интервалов
-learning_sample_size = 200 # кол-во точек в выборке
+learning_sample_size = 300 # кол-во точек в выборке
 
 epoch_count = 200 # максимальное кол-во эпох
 neiron_count = 20 # кол-во нейронов в скрытом слое
@@ -52,7 +52,7 @@ print('Интервал: \n', x)
 print('** Определяем функциональную связь, которую будем восстанавливать **')
 
 def relation_spot(x):
-    return (3 + 5 * x + (2 * x) ** 2)
+    return (3 + (5 * x) + 2 * x ** 2)
     
 # рассчитываем значение функции для интервалов
 y = np.array(
