@@ -234,7 +234,7 @@ plt.legend()
 """
 
 train_m = 1.2
-train_sko = 0.7
+train_sko = 0.1
 
 def variate(z, m, sko):
     return z * random.normalvariate(m, sko)
