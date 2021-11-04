@@ -40,63 +40,63 @@ Non-trainable params: 0
 _________________________________________________________________
 None
 Epoch 1/5
-79/79 - 1s - loss: 0.7747 - accuracy: 0.5414 - val_loss: 0.7414 - val_accuracy: 0.5802
+79/79 - 1s - loss: 0.6900 - accuracy: 0.6255 - val_loss: 0.6789 - val_accuracy: 0.6270
 Epoch 2/5
-79/79 - 0s - loss: 0.7294 - accuracy: 0.5947 - val_loss: 0.7180 - val_accuracy: 0.5939
+79/79 - 0s - loss: 0.6712 - accuracy: 0.6344 - val_loss: 0.6647 - val_accuracy: 0.6390
 Epoch 3/5
-79/79 - 0s - loss: 0.7076 - accuracy: 0.6028 - val_loss: 0.6977 - val_accuracy: 0.6074
+79/79 - 0s - loss: 0.6593 - accuracy: 0.6463 - val_loss: 0.6551 - val_accuracy: 0.6505
 Epoch 4/5
-79/79 - 0s - loss: 0.6888 - accuracy: 0.6133 - val_loss: 0.6811 - val_accuracy: 0.6183
+79/79 - 0s - loss: 0.6513 - accuracy: 0.6575 - val_loss: 0.6495 - val_accuracy: 0.6607
 Epoch 5/5
-79/79 - 0s - loss: 0.6738 - accuracy: 0.6254 - val_loss: 0.6681 - val_accuracy: 0.6334
-<keras.callbacks.History object at 0x7f87dd021580>
-test score: 0.6681273579597473
-test accuracy: 0.633372962474823
+79/79 - 0s - loss: 0.6462 - accuracy: 0.6638 - val_loss: 0.6456 - val_accuracy: 0.6636
+<keras.callbacks.History object at 0x7fcbb1562880>
+test score: 0.6456086039543152
+test accuracy: 0.6635515689849854
 Epoch 1/10
-79/79 - 0s - loss: 0.6625 - accuracy: 0.6398 - val_loss: 0.6586 - val_accuracy: 0.6447
+79/79 - 0s - loss: 0.6431 - accuracy: 0.6671 - val_loss: 0.6429 - val_accuracy: 0.6660
 Epoch 2/10
-79/79 - 0s - loss: 0.6544 - accuracy: 0.6494 - val_loss: 0.6519 - val_accuracy: 0.6566
+79/79 - 0s - loss: 0.6408 - accuracy: 0.6680 - val_loss: 0.6414 - val_accuracy: 0.6663
 Epoch 3/10
-79/79 - 0s - loss: 0.6485 - accuracy: 0.6611 - val_loss: 0.6472 - val_accuracy: 0.6621
+79/79 - 0s - loss: 0.6395 - accuracy: 0.6683 - val_loss: 0.6404 - val_accuracy: 0.6664
 Epoch 4/10
-79/79 - 0s - loss: 0.6446 - accuracy: 0.6653 - val_loss: 0.6441 - val_accuracy: 0.6659
+79/79 - 0s - loss: 0.6386 - accuracy: 0.6682 - val_loss: 0.6398 - val_accuracy: 0.6664
 Epoch 5/10
-79/79 - 0s - loss: 0.6417 - accuracy: 0.6679 - val_loss: 0.6419 - val_accuracy: 0.6664
+79/79 - 0s - loss: 0.6379 - accuracy: 0.6682 - val_loss: 0.6395 - val_accuracy: 0.6664
 Epoch 6/10
-79/79 - 0s - loss: 0.6398 - accuracy: 0.6682 - val_loss: 0.6405 - val_accuracy: 0.6664
+79/79 - 0s - loss: 0.6377 - accuracy: 0.6682 - val_loss: 0.6391 - val_accuracy: 0.6664
 Epoch 7/10
-79/79 - 0s - loss: 0.6385 - accuracy: 0.6682 - val_loss: 0.6397 - val_accuracy: 0.6664
+79/79 - 0s - loss: 0.6372 - accuracy: 0.6682 - val_loss: 0.6388 - val_accuracy: 0.6664
 Epoch 8/10
-79/79 - 0s - loss: 0.6378 - accuracy: 0.6682 - val_loss: 0.6389 - val_accuracy: 0.6664
+79/79 - 0s - loss: 0.6370 - accuracy: 0.6682 - val_loss: 0.6392 - val_accuracy: 0.6664
 Epoch 9/10
-79/79 - 0s - loss: 0.6370 - accuracy: 0.6682 - val_loss: 0.6385 - val_accuracy: 0.6664
+79/79 - 0s - loss: 0.6368 - accuracy: 0.6682 - val_loss: 0.6385 - val_accuracy: 0.6664
 Epoch 10/10
-79/79 - 0s - loss: 0.6365 - accuracy: 0.6682 - val_loss: 0.6383 - val_accuracy: 0.6664
-<keras.callbacks.History object at 0x7f87bee9c250>
-test score: 0.63826984167099
+79/79 - 0s - loss: 0.6367 - accuracy: 0.6682 - val_loss: 0.6386 - val_accuracy: 0.6664
+<keras.callbacks.History object at 0x7fcbb1f13760>
+test score: 0.6385692358016968
 test accuracy: 0.6663785576820374
 ** Теперь построим и обучим сеть с 20000 ед. выборки **
 Epoch 1/10
-157/157 - 0s - loss: 0.5724 - accuracy: 0.8831 - val_loss: 0.4836 - val_accuracy: 0.9984
+157/157 - 0s - loss: 0.5720 - accuracy: 0.8894 - val_loss: 0.4846 - val_accuracy: 0.9998
 Epoch 2/10
-157/157 - 0s - loss: 0.4354 - accuracy: 0.9995 - val_loss: 0.3941 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.4362 - accuracy: 0.9999 - val_loss: 0.3949 - val_accuracy: 1.0000
 Epoch 3/10
-157/157 - 0s - loss: 0.3631 - accuracy: 1.0000 - val_loss: 0.3352 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.3636 - accuracy: 1.0000 - val_loss: 0.3359 - val_accuracy: 1.0000
 Epoch 4/10
-157/157 - 0s - loss: 0.3122 - accuracy: 1.0000 - val_loss: 0.2912 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.3126 - accuracy: 1.0000 - val_loss: 0.2915 - val_accuracy: 1.0000
 Epoch 5/10
-157/157 - 0s - loss: 0.2731 - accuracy: 1.0000 - val_loss: 0.2564 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.2733 - accuracy: 1.0000 - val_loss: 0.2565 - val_accuracy: 1.0000
 Epoch 6/10
-157/157 - 0s - loss: 0.2417 - accuracy: 1.0000 - val_loss: 0.2279 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.2418 - accuracy: 1.0000 - val_loss: 0.2280 - val_accuracy: 1.0000
 Epoch 7/10
-157/157 - 0s - loss: 0.2156 - accuracy: 1.0000 - val_loss: 0.2041 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.2157 - accuracy: 1.0000 - val_loss: 0.2041 - val_accuracy: 1.0000
 Epoch 8/10
-157/157 - 0s - loss: 0.1935 - accuracy: 1.0000 - val_loss: 0.1837 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.1936 - accuracy: 1.0000 - val_loss: 0.1837 - val_accuracy: 1.0000
 Epoch 9/10
-157/157 - 0s - loss: 0.1746 - accuracy: 1.0000 - val_loss: 0.1661 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.1747 - accuracy: 1.0000 - val_loss: 0.1661 - val_accuracy: 1.0000
 Epoch 10/10
-157/157 - 0s - loss: 0.1582 - accuracy: 1.0000 - val_loss: 0.1507 - val_accuracy: 1.0000
-<keras.callbacks.History object at 0x7f87dcff3be0>
+157/157 - 0s - loss: 0.1582 - accuracy: 1.0000 - val_loss: 0.1508 - val_accuracy: 1.0000
+<keras.callbacks.History object at 0x7fcbb15253d0>
 ** Модель с двухслойным персептроном ** 
 
 Model: "sequential_1"
@@ -115,23 +115,23 @@ None
 ** Обучаем модель с двухслойным персептроном ** 
 
 Epoch 1/10
-157/157 - 1s - loss: 0.6021 - accuracy: 0.6993 - val_loss: 0.4576 - val_accuracy: 0.8724
+157/157 - 0s - loss: 0.6625 - accuracy: 0.6045 - val_loss: 0.4895 - val_accuracy: 0.8099
 Epoch 2/10
-157/157 - 0s - loss: 0.3208 - accuracy: 0.9665 - val_loss: 0.1998 - val_accuracy: 0.9998
+157/157 - 0s - loss: 0.3089 - accuracy: 0.9502 - val_loss: 0.1605 - val_accuracy: 1.0000
 Epoch 3/10
-157/157 - 0s - loss: 0.1338 - accuracy: 1.0000 - val_loss: 0.0855 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.1027 - accuracy: 1.0000 - val_loss: 0.0644 - val_accuracy: 1.0000
 Epoch 4/10
-157/157 - 0s - loss: 0.0612 - accuracy: 1.0000 - val_loss: 0.0433 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.0469 - accuracy: 1.0000 - val_loss: 0.0338 - val_accuracy: 1.0000
 Epoch 5/10
-157/157 - 0s - loss: 0.0332 - accuracy: 1.0000 - val_loss: 0.0254 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.0263 - accuracy: 1.0000 - val_loss: 0.0204 - val_accuracy: 1.0000
 Epoch 6/10
-157/157 - 0s - loss: 0.0204 - accuracy: 1.0000 - val_loss: 0.0164 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.0166 - accuracy: 1.0000 - val_loss: 0.0135 - val_accuracy: 1.0000
 Epoch 7/10
-157/157 - 0s - loss: 0.0136 - accuracy: 1.0000 - val_loss: 0.0113 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.0113 - accuracy: 1.0000 - val_loss: 0.0095 - val_accuracy: 1.0000
 Epoch 8/10
-157/157 - 0s - loss: 0.0097 - accuracy: 1.0000 - val_loss: 0.0082 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.0082 - accuracy: 1.0000 - val_loss: 0.0070 - val_accuracy: 1.0000
 Epoch 9/10
-157/157 - 0s - loss: 0.0072 - accuracy: 1.0000 - val_loss: 0.0062 - val_accuracy: 1.0000
+157/157 - 0s - loss: 0.0061 - accuracy: 1.0000 - val_loss: 0.0053 - val_accuracy: 1.0000
 Epoch 10/10
-157/157 - 0s - loss: 0.0055 - accuracy: 1.0000 - val_loss: 0.0048 - val_accuracy: 1.0000
-<keras.callbacks.History object at 0x7f87beeb1700>
+157/157 - 0s - loss: 0.0047 - accuracy: 1.0000 - val_loss: 0.0042 - val_accuracy: 1.0000
+<keras.callbacks.History object at 0x7fcbb1996910>
