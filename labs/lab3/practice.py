@@ -118,7 +118,7 @@ plt.grid(
 net_data = data.copy()
 d = data[y_name]
 
-for shift in range(1, max_shift_range + 1):
+for shift in range(1, max_shift_range):
     net_data[y_name + '_' + str(shift)] = d.shift(shift)
 
 net_data = net_data[5:]
@@ -316,9 +316,10 @@ if not is_model_ready:
     """
 
     print('** Выбираем лучшую модель **')
-    models = tuner.get_best_models(num_models = 1)
+    models = tuner.get_best_models(num_models = 3)
     model = models[0]
     # сохраняем модель
+    print('Сохраняем модель:', model)
     model.save(best_model_name)
 else:
     model = load_model(best_model_name)
